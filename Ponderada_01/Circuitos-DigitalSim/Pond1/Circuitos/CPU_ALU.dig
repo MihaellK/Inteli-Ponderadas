@@ -91,7 +91,7 @@
 101/110/111 - NULL</string>
         </entry>
       </elementAttributes>
-      <pos x="-480" y="-300"/>
+      <pos x="-360" y="-80"/>
     </visualElement>
     <visualElement>
       <elementName>CPU_FullAdder_8bits.dig</elementName>

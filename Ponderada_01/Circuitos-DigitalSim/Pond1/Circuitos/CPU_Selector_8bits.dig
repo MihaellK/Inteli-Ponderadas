@@ -71,7 +71,7 @@
           <string>Enable_Select</string>
         </entry>
       </elementAttributes>
-      <pos x="800" y="0"/>
+      <pos x="840" y="80"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -81,7 +81,7 @@
           <string>Es</string>
         </entry>
       </elementAttributes>
-      <pos x="800" y="20"/>
+      <pos x="840" y="100"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -326,8 +326,8 @@
       <p2 x="700" y="220"/>
     </wire>
     <wire>
-      <p1 x="800" y="0"/>
-      <p2 x="800" y="20"/>
+      <p1 x="840" y="80"/>
+      <p2 x="840" y="100"/>
     </wire>
   </wires>
   <measurementOrdering/>
