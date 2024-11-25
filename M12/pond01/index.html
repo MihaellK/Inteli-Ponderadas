@@ -1,0 +1,81 @@
+
+<html>
+  <head>
+    <!-- <meta charset="UTF-8" /> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bibliotecas que precisam ser importadas para usar Mindar com A-frame -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script defer src="./js/index.js"></script>
+  
+
+    <title>Business Card - Mihaell Alves</title>
+  </head>
+  <!-- mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind; filterMinCF: 0.001; filterBeta: 1" -->
+  <body>
+    <!-- Mudar target - com problemas -->
+    <a-scene
+    mindar-image="imageTargetSrc: ./assets/target/targets.mind; filterMinCF: 0.001; filterBeta: 1"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+    
+        <a-assets>
+          <img id="businessCard" src="./assets/business-card.png"/>
+
+          <img id="iconGit" src="./assets/github.png"/>
+          <img id="iconLinkedin" src="./assets/linkedin.png"/>
+          <img id="iconTour" src="./assets/360tour.png" />
+        </a-assets>
+        
+        <a-camera position="0 0 0" look-controls="enabled: false"
+          cursor="fuse: false; rayOrigin: mouse;"
+          raycaster="far: 10000; objects: .clickable;"
+        ></a-camera>  
+
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-entity>
+            <a-image
+                id="card"
+                position="0 0 0"
+                height="0.552"
+                width="1"
+                src="#businessCard"
+            ></a-image>
+          </a-entity>
+
+          <a-entity position="-0.035 -0.45 0">
+            <a-image
+                id="btnGit"
+                class="clickable"
+                position="-0.122 0.010 0.013"
+                height="0.15"
+                width="0.15"
+                src="#iconGit"
+                animation="property: scale; to: 1.2 1.2 1.2; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+            <a-image
+                id="btnLinkedin"
+                class="clickable"
+                position="0.20 -0.028 -0.032"       
+                height="0.15"
+                width="0.15"
+                src="#iconLinkedin"
+                animation="property: scale; to: 1.2 1.2 1.2; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+            <a-image
+                id="btnTour"
+                class="clickable"
+                position="0.50 -0.028 -0.032"       
+                height="0.15"
+                width="0.15"
+                src="#iconTour"
+                animation="property: scale; to: 1.2 1.2 1.2; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+          </a-entity>
+        </a-entity>
+    </a-scene> 
+  </body>
+</html>
