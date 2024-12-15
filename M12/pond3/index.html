@@ -1,46 +1,90 @@
-<!-- Modelos - A-Frame -->
- <!-- Texturas de: https://texturelabs.org/ -->
- <html>
-    <head>
-      <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    </head>
-    <body>
-      <a-scene>
-          <!-- Gerenciamento de Assets do A-Frame -->
-        <a-assets>
-            <!-- Fundo -->
-            <img id="fundo" src="./assets/universe_sky.jpg" />
-            <a-asset-item id="room-obj" src="./assets/hospRoom/Medical-Hospital-Equipment-001.obj"></a-asset-item>
-            <a-asset-item id="room-mtl" src="./assets/hospRoom/Medical-Hospital-Equipment-001.mtl"></a-asset-item>
-        </a-assets>
-    
-        <a-entity rotation="55 80 0">
-            <a-sky src="#fundo"></a-sky>
-        </a-entity>
-         
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Gerenciamento de Assets -->
+      <a-assets>
+        <img id="fundo1" src="./assets/universe_sky.jpg" />
+        <a-asset-item id="room-obj" src="./assets/hospRoom/Medical-Hospital-Equipment-001.obj"></a-asset-item>
+        <a-asset-item id="room-mtl" src="./assets/hospRoom/Medical-Hospital-Equipment-001.mtl"></a-asset-item>
+      </a-assets>
 
-        <a-entity 
-        obj-model="obj:#room-obj;  mtl:#room-mtl"
+      <!-- Skybox -->
+      <a-sky id="sky" src="#fundo1"></a-sky>
+
+      <!-- Objeto 3D -->
+      <a-entity
+        obj-model="obj:#room-obj; mtl:#room-mtl"
         position="0.5 0.5 -2"
         scale=".05 .05 .05"
-         ></a-entity>
+      ></a-entity>
 
-        <a-entity 
-        gltf-model="#personagem"
-        scale="0.6 0.6 0.6"
-        position="3.5 0 0"
-        rotation="0 45 0"
-        ></a-entity>
+      <!-- Botão interativo (movido para o centro e acima do modelo do quarto) -->
+      <a-entity position="5 6 -2">
+        <a-box
+          id="botao"
+          position="0 0 0"
+          color="#FF4500"
+          depth="0.2"
+          height="0.5"
+          width="1"
+        ></a-box>
+        <a-text
+          value="Clique para girar"
+          align="center"
+          position="0 0.8 0"
+          color="#000"
+        ></a-text>
+      </a-entity>
 
-        <a-entity position="5 2 0" rotation="0 180 0"
-        animation="property:rotation;
-         to: 0 900 0;
-         loop:true;
-         dur:15000;
-         easing:easeInOutCubic">
-        <a-camera></a-camera>
-        </a-entity>
+      <!-- Câmera com cursor -->
+      <a-entity position="4 6 0">
+        <a-camera>
+          <a-cursor color="red"></a-cursor>
+        </a-camera>
+      </a-entity>
+    </a-scene>
 
-      </a-scene>
-    </body>
-  </html>
+    <!-- Script para animação de rotação -->
+    <script>
+      // Referência ao botão
+      const botao = document.querySelector('#botao');
+
+      // Estado para controlar se a animação pode ocorrer
+      let podeAnimar = true;
+
+      // Evento ao entrar no botão com a retícula
+      botao.addEventListener('mouseenter', () => {
+        // Habilita animação ao entrar no botão
+        podeAnimar = true;
+        botao.setAttribute('color', '#FFA500'); // Altera cor para indicar interatividade
+      });
+
+      // Evento ao sair do botão com a retícula
+      botao.addEventListener('mouseleave', () => {
+        // Bloqueia animação ao sair do botão
+        podeAnimar = false;
+        botao.setAttribute('color', '#FF4500'); // Volta para a cor original
+      });
+
+      // Evento de clique usando `mousedown` para iniciar a animação
+      botao.addEventListener('mousedown', () => {
+        if (podeAnimar) {
+          // Adiciona a animação de rotação
+          botao.setAttribute('animation', {
+            property: 'rotation',
+            to: '0 360 0',
+            dur: 2000, // Duração de 2 segundos
+            easing: 'easeInOutQuad',
+            loop: false,
+          });
+
+          // Bloqueia múltiplos cliques enquanto a retícula está no botão
+          podeAnimar = false;
+        }
+      });
+    </script>
+  </body>
+</html>
